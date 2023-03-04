@@ -11,7 +11,4 @@ public interface ClientRepository extends CrudRepository<ClientInfo, Long> {
 
     Optional<ClientInfo> findByIdnumber(long idnumber);
 
-    //Boolean existsByMobile(long Mobile);
-
-    //<ClientInfo> findByMobile(long Mobile);
 }

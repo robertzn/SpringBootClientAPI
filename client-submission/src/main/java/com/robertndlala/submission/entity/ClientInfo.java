@@ -1,7 +1,5 @@
 package com.robertndlala.submission.entity;
 
-import java.time.LocalDate;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -46,5 +44,7 @@ public class ClientInfo {
     @NonNull
     @Column(name = "physical_address", nullable = false)
     private String physical_address;
-    
+
+    public ClientInfo(String count, String first_name, String last_name, String Moblie, String idnumber) {
+    }
 }
