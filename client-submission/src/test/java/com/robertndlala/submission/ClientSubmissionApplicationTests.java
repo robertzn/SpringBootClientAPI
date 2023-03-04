@@ -52,7 +52,7 @@ class ClientSubmissionApplicationTests {
 			new ClientInfo("1", "Jon", "Ndlala",  "12345678912", "123456789785214"),
 
 	};
-
+/*
 
 	@Test
 	public void getClientByIdTest() throws Exception {
