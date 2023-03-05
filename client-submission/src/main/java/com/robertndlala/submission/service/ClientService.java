@@ -10,8 +10,12 @@ public interface ClientService {
     ClientInfo saveClient(ClientInfo clientInfo);
     ClientInfo updateClient(ClientInfo clientInfo);
 
+    Object checkIfStudentIsNull(int i);
+
     ClientInfo readClient();
     void deleteClient(Long id);
 
     List<ClientInfo> getClient();
+
+    //boolean checkIfClientIsNull(int i);
 }

@@ -1,4 +1,5 @@
 package com.robertndlala.submission;
+import ch.qos.logback.core.net.server.Client;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.robertndlala.submission.entity.ClientInfo;
 import com.robertndlala.submission.repository.ClientRepository;
@@ -12,67 +13,58 @@ import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.mock.web.MockHttpServletRequest;
 import org.springframework.test.context.TestPropertySource;
 
-import java.util.ArrayList;
-import java.util.List;
+import org.junit.jupiter.api.AfterEach;
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.Test;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.jdbc.core.JdbcTemplate;
+import org.springframework.test.context.TestPropertySource;
+import org.springframework.test.context.jdbc.Sql;
+import org.springframework.test.context.jdbc.SqlConfig;
+import org.springframework.test.context.jdbc.SqlGroup;
+
 import java.util.Optional;
 
-import static org.junit.jupiter.api.Assertions.*;
-
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.springframework.test.web.client.match.MockRestRequestMatchers.jsonPath;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import org.junit.jupiter.api.Test;
-import org.springframework.boot.test.context.SpringBootTest;
-import org.springframework.test.web.client.RequestMatcher;
-import org.springframework.test.web.servlet.MockMvc;
-import org.springframework.test.web.servlet.RequestBuilder;
-import org.springframework.test.web.servlet.request.MockMvcRequestBuilders;
+import static org.junit.jupiter.api.Assertions.assertFalse;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
 @TestPropertySource("/application.properties")
-@AutoConfigureMockMvc
+
 @SpringBootTest
+
+
 class ClientSubmissionApplicationTests {
 
-	private static MockHttpServletRequest request;
-	@Autowired
 	private JdbcTemplate jdbc;
-	@Autowired
-	private ObjectMapper objectMapper;
-	@Autowired
-	private MockMvc mockMvc;
-	@Autowired
-	private ClientService clientService;
-
-	@Autowired
-	private ClientRepository ClientRepository;
 
 
-	private ClientInfo[] ClientInfos = new ClientInfo[] {
-			new ClientInfo("1", "Jon", "Ndlala",  "12345678912", "123456789785214"),
+	private ClientInfo clientInfo;
 
-	};
-/*
+	private   ClientService clientService;
+
+	@Value("${sql.script.create.Client}")
+	private String sqlAddClientInfo;
+
+	@Value("${sql.script.delete.Client}")
+	private String sqlDeleteClientInfo;
+
+
+	@BeforeEach
+	public void setupDatabase() {
+		jdbc.execute(sqlAddClientInfo);
+	}
+
+
 
 	@Test
-	public void getClientByIdTest() throws Exception {
-		RequestBuilder request = MockMvcRequestBuilders.get("/client/1");
-		mockMvc.perform(request)
-				.andExpect(status().isOk())
-				.andExpect(ClientInfo().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(jsonPath("$.count").value(ClientInfos[0].getCount()))
-				.andExpect(jsonPath("$.first_name").value(ClientInfos[0].getFirst_name()));
-				.andExpect(jsonPath("$.Moblie").value(ClientInfos[0].getMobile()));
-				.andExpect(jsonPath("$.first_name").value(ClientInfos[0].getFirst_name()));
+	public void deleteClientInfoService() {
+		Optional<Client> deleteClient = clientInfo.findById(1);
+
+		assertFalse(deleteClient.isPresent(), "return false");
+
 	}
-
-	private void andExpect(RequestMatcher value) {
-	}
-
-	/*Long count, String first_name, String last_name, lon01574852
-	g Moblie, Long idnumber*/
-
-
 
 
 

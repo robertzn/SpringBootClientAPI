@@ -8,7 +8,10 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.validation.constraints.Size;
 
+import ch.qos.logback.core.net.server.Client;
 import lombok.*;
+
+import java.util.Optional;
 
 @Getter
 @Setter
@@ -31,7 +34,7 @@ public class ClientInfo {
     @Column(name = "last_name", nullable = false )
     private String last_name;
 
-    @NonNull
+
     @Size( min = 10, max = 10,  message = "ID Number must be 10 Number")
     @Column(name = "Mobile", nullable = false , length = 10, unique = true)
     private Long Mobile;
@@ -41,10 +44,9 @@ public class ClientInfo {
     @Column(name = "idnumber", nullable = false , length = 13, unique = true)
     private Long idnumber;
 
-    @NonNull
+
     @Column(name = "physical_address", nullable = false)
     private String physical_address;
 
-    public ClientInfo(String count, String first_name, String last_name, String Moblie, String idnumber) {
-    }
+
 }

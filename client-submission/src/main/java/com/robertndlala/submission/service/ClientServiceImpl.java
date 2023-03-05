@@ -4,7 +4,6 @@ package com.robertndlala.submission.service;
 import java.util.List;
 import java.util.Optional;
 
-import com.robertndlala.submission.entity.ClientModel;
 import com.robertndlala.submission.exception.ItemExistsException;
 import com.robertndlala.submission.exception.ResourceNotFoundException;
 import com.robertndlala.submission.repository.ClientRepository;
@@ -48,6 +47,11 @@ public class ClientServiceImpl implements ClientService {
     @Override
     public List<ClientInfo> getClient() {
         return (List<ClientInfo>)clientRepository.findAll();
+    }
+
+    @Override
+    public Object checkIfStudentIsNull(int i) {
+        return null;
     }
 
     @Override
